@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -9,198 +8,147 @@
 <title>Archery Timer</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600&display=swap');
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-–bg: #1a1a1a;
-–red: #c0392b;
-–red-dark: #922b21;
-–green: #1e8449;
-–green-dark: #196f3d;
-–orange: #d35400;
-–orange-dark: #a04000;
-–idle: #1a1a1a;
-}
-
-body {
-font-family: ‘Barlow’, sans-serif;
-background: var(–bg);
-color: white;
-height: 100dvh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-transition: background 0.5s ease;
-user-select: none;
-}
-
-body.phase-lead    { background: var(–red); }
-body.phase-shoot   { background: var(–green); }
-body.phase-warning { background: var(–orange); }
-body.phase-end     { background: #2c2c2c; }
-
-.container {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 0;
-width: 100%;
-padding: 20px;
-}
-
-.phase-label {
-font-family: ‘Barlow’, sans-serif;
-font-weight: 300;
-font-size: clamp(14px, 3.5vw, 20px);
-letter-spacing: 0.35em;
-text-transform: uppercase;
-opacity: 0.75;
-height: 28px;
-transition: opacity 0.3s;
-}
-
-.timer-display {
-font-family: ‘Bebas Neue’, sans-serif;
-font-size: clamp(140px, 38vw, 280px);
-line-height: 0.9;
-letter-spacing: -2px;
-text-shadow: 0 4px 40px rgba(0,0,0,0.4);
-transition: color 0.3s;
-}
-
-.timer-display.pulse {
-animation: pulse 0.15s ease-out;
-}
-
-@keyframes pulse {
-0%   { transform: scale(1); }
-50%  { transform: scale(1.04); }
-100% { transform: scale(1); }
-}
-
-.status-msg {
-font-family: ‘Barlow’, sans-serif;
-font-weight: 600;
-font-size: clamp(18px, 5vw, 32px);
-letter-spacing: 0.1em;
-text-transform: uppercase;
-margin-top: 8px;
-height: 40px;
-opacity: 0.9;
-}
-
-/* Duration selector */
-.duration-section {
-margin-top: 32px;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 12px;
-}
-
-.duration-label {
-font-size: 12px;
-letter-spacing: 0.3em;
-text-transform: uppercase;
-opacity: 0.5;
-}
-
-.duration-buttons {
-display: flex;
-gap: 10px;
-flex-wrap: wrap;
-justify-content: center;
-}
-
-.dur-btn {
-background: rgba(255,255,255,0.1);
-border: 1.5px solid rgba(255,255,255,0.25);
-color: white;
-font-family: ‘Barlow’, sans-serif;
-font-weight: 600;
-font-size: 15px;
-padding: 10px 18px;
-border-radius: 8px;
-cursor: pointer;
-letter-spacing: 0.05em;
-transition: background 0.2s, border-color 0.2s, transform 0.1s;
--webkit-tap-highlight-color: transparent;
-}
-
-.dur-btn:active { transform: scale(0.95); }
-
-.dur-btn.active {
-background: rgba(255,255,255,0.25);
-border-color: rgba(255,255,255,0.8);
-}
-
-/* Start / Reset buttons */
-.controls {
-margin-top: 28px;
-display: flex;
-gap: 14px;
-}
-
-.btn-start {
-background: white;
-color: #1a1a1a;
-font-family: ‘Barlow’, sans-serif;
-font-weight: 600;
-font-size: 18px;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-padding: 16px 48px;
-border: none;
-border-radius: 50px;
-cursor: pointer;
-transition: transform 0.1s, opacity 0.2s;
--webkit-tap-highlight-color: transparent;
-}
-
-.btn-start:active { transform: scale(0.96); }
-.btn-start:disabled { opacity: 0.35; cursor: default; }
-
-.btn-reset {
-background: transparent;
-border: 1.5px solid rgba(255,255,255,0.35);
-color: white;
-font-family: ‘Barlow’, sans-serif;
-font-weight: 600;
-font-size: 18px;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-padding: 16px 32px;
-border-radius: 50px;
-cursor: pointer;
-transition: transform 0.1s, background 0.2s;
--webkit-tap-highlight-color: transparent;
-display: none;
-}
-
-.btn-reset.visible { display: block; }
-.btn-reset:active { transform: scale(0.96); background: rgba(255,255,255,0.1); }
-
-/* End state */
-.end-icon {
-font-size: 60px;
-display: none;
-margin-bottom: 8px;
-}
-.end-icon.visible { display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #1a1a1a;
+    --red: #c0392b;
+    --green: #1e8449;
+    --orange: #d35400;
+  }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: #1a1a1a;
+    color: white;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background 0.5s ease;
+    user-select: none;
+  }
+  body.phase-lead    { background: #c0392b; }
+  body.phase-shoot   { background: #1e8449; }
+  body.phase-warning { background: #d35400; }
+  body.phase-end     { background: #2c2c2c; }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+  }
+  .phase-label {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 3.5vw, 20px);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    height: 28px;
+  }
+  .timer-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(140px, 38vw, 280px);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.4);
+  }
+  .timer-display.pulse { animation: pulse 0.15s ease-out; }
+  @keyframes pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+  .status-msg {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: clamp(18px, 5vw, 32px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    height: 40px;
+    opacity: 0.9;
+  }
+  .duration-section {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .duration-label {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .duration-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dur-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dur-btn:active { transform: scale(0.95); }
+  .dur-btn.active {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.8);
+  }
+  .controls { margin-top: 28px; display: flex; gap: 14px; }
+  .btn-start {
+    background: white;
+    color: #1a1a1a;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 48px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-start:disabled { opacity: 0.35; cursor: default; }
+  .btn-reset {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .end-icon { font-size: 60px; display: none; margin-bottom: 8px; }
+  .end-icon.visible { display: block; }
 </style>
-
 </head>
 <body>
-
 <div class="container">
   <div class="end-icon" id="endIcon">🏹</div>
   <div class="phase-label" id="phaseLabel">Ready</div>
   <div class="timer-display" id="timerDisplay">10</div>
   <div class="status-msg" id="statusMsg"></div>
-
   <div class="duration-section" id="durationSection">
     <div class="duration-label">Shooting time</div>
     <div class="duration-buttons">
@@ -210,65 +158,49 @@ margin-bottom: 8px;
       <button class="dur-btn" data-secs="90" onclick="selectDuration(this)">90 sec</button>
     </div>
   </div>
-
   <div class="controls">
     <button class="btn-start" id="btnStart" onclick="startTimer()">Start</button>
-    <button class="btn-reset visible" id="btnReset" onclick="resetTimer()" style="display:none">Reset</button>
+    <button class="btn-reset" id="btnReset" onclick="resetTimer()" style="display:none">Reset</button>
   </div>
 </div>
-
 <script>
-  // ── Audio engine ──────────────────────────────────────────────
   let audioCtx = null;
-
   function getAudioCtx() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     return audioCtx;
   }
-
-  function beep(freq = 880, duration = 0.3, vol = 1.0) {
+  function beep(freq, duration, vol) {
     const ctx = getAudioCtx();
-    // Resume in case browser suspended it
     if (ctx.state === 'suspended') ctx.resume();
-
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    // Add a compressor so it punches through on phone speakers
     const comp = ctx.createDynamicsCompressor();
-    osc.connect(gain);
-    gain.connect(comp);
-    comp.connect(ctx.destination);
-
-    osc.type = 'square'; // square wave is much louder/sharper than sine
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(vol, ctx.currentTime);
-    gain.gain.setValueAtTime(vol, ctx.currentTime + duration - 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.connect(gain); gain.connect(comp); comp.connect(ctx.destination);
+    osc.type = 'square';
+    osc.frequency.value = freq || 880;
+    gain.gain.setValueAtTime(vol || 1.0, ctx.currentTime);
+    gain.gain.setValueAtTime(vol || 1.0, ctx.currentTime + (duration||0.25) - 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (duration||0.25));
     osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + duration + 0.05);
+    osc.stop(ctx.currentTime + (duration||0.25) + 0.05);
   }
-
-  function beepSequence(count, gapMs = 400) {
+  function beepSequence(count, gapMs) {
     for (let i = 0; i < count; i++) {
-      setTimeout(() => beep(880, 0.25, 1.0), i * gapMs);
+      setTimeout(() => beep(880, 0.25, 1.0), i * (gapMs||400));
     }
   }
-
-  // ── State ─────────────────────────────────────────────────────
   let shootDuration = 240;
-  let phase = 'idle';   // idle | lead | shoot | end
+  let phase = 'idle';
   let secondsLeft = 0;
   let intervalId = null;
-
-  const body         = document.body;
+  const body = document.body;
   const timerDisplay = document.getElementById('timerDisplay');
-  const phaseLabel   = document.getElementById('phaseLabel');
-  const statusMsg    = document.getElementById('statusMsg');
+  const phaseLabel = document.getElementById('phaseLabel');
+  const statusMsg = document.getElementById('statusMsg');
   const durationSect = document.getElementById('durationSection');
-  const btnStart     = document.getElementById('btnStart');
-  const btnReset     = document.getElementById('btnReset');
-  const endIcon      = document.getElementById('endIcon');
-
+  const btnStart = document.getElementById('btnStart');
+  const btnReset = document.getElementById('btnReset');
+  const endIcon = document.getElementById('endIcon');
   function selectDuration(btn) {
     if (phase !== 'idle') return;
     document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
@@ -276,57 +208,43 @@ margin-bottom: 8px;
     shootDuration = parseInt(btn.dataset.secs);
     timerDisplay.textContent = '10';
   }
-
   function setDisplay(secs) {
     timerDisplay.textContent = secs;
-    // pulse
     timerDisplay.classList.remove('pulse');
     void timerDisplay.offsetWidth;
     timerDisplay.classList.add('pulse');
   }
-
   function startTimer() {
-    // Unlock audio on first user gesture
     const ctx = getAudioCtx();
     if (ctx.state === 'suspended') ctx.resume();
-
     phase = 'lead';
     secondsLeft = 10;
-
     btnStart.disabled = true;
     btnStart.style.display = 'none';
     btnReset.style.display = 'block';
     durationSect.style.display = 'none';
     endIcon.classList.remove('visible');
-
     body.className = 'phase-lead';
     phaseLabel.textContent = 'Get Ready';
     statusMsg.textContent = '';
     setDisplay(10);
-
-    // Two beeps to start lead-in
     beepSequence(2);
-
     intervalId = setInterval(tick, 1000);
   }
-
   function tick() {
     secondsLeft--;
-
     if (phase === 'lead') {
       if (secondsLeft > 0) {
         setDisplay(secondsLeft);
       } else {
-        // Transition to shoot
         phase = 'shoot';
         secondsLeft = shootDuration;
         body.className = 'phase-shoot';
         phaseLabel.textContent = 'Shoot';
         statusMsg.textContent = '';
         setDisplay(secondsLeft);
-        beep(660, 0.35, 1.0); // single beep
+        beep(660, 0.35, 1.0);
       }
-
     } else if (phase === 'shoot') {
       if (secondsLeft > 30) {
         body.className = 'phase-shoot';
@@ -338,29 +256,23 @@ margin-bottom: 8px;
       } else if (secondsLeft > 0) {
         setDisplay(secondsLeft);
       } else {
-        // End
         endSequence();
       }
     }
   }
-
   function endSequence() {
     clearInterval(intervalId);
     phase = 'end';
     body.className = 'phase-end';
     timerDisplay.textContent = '0';
-    phaseLabel.textContent = 'Time\'s Up';
+    phaseLabel.textContent = "Time's Up";
     statusMsg.textContent = 'End of End';
     endIcon.classList.add('visible');
-
-    // Three beeps
     beepSequence(3, 320);
-
     btnStart.disabled = false;
     btnStart.textContent = 'New End';
     btnStart.style.display = 'block';
   }
-
   function resetTimer() {
     clearInterval(intervalId);
     phase = 'idle';
@@ -369,7 +281,6 @@ margin-bottom: 8px;
     phaseLabel.textContent = 'Ready';
     statusMsg.textContent = '';
     endIcon.classList.remove('visible');
-
     btnStart.disabled = false;
     btnStart.textContent = 'Start';
     btnStart.style.display = 'block';
@@ -377,6 +288,5 @@ margin-bottom: 8px;
     durationSect.style.display = '';
   }
 </script>
-
 </body>
 </html>
